@@ -1,0 +1,136 @@
+---
+import { nav, profile } from "../data/content";
+---
+
+<header id="site-nav" class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a
+      href="#hero"
+      class="font-mono text-lg font-bold tracking-tight text-lightest transition-colors hover:text-accent"
+    >
+      RB<span class="text-accent">.</span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden items-center gap-6 md:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={`#${item.id}`}
+              data-nav={item.id}
+              class="nav-link whitespace-nowrap text-sm text-stone-300 transition-colors hover:text-accent"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href={profile.resumeUrl}
+          download
+          class="rounded border border-accent px-3 py-1.5 font-mono text-xs text-accent transition-colors hover:bg-accent/10"
+        >
+          Resume
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="relative z-50 text-light transition-colors hover:text-accent md:hidden"
+    >
+      <svg
+        id="icon-open"
+        class="h-6 w-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg
+        id="icon-close"
+        class="hidden h-6 w-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M6 6l12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile full-screen menu -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-7 bg-canvas/95 backdrop-blur-sm md:hidden"
+>
+  {
+    nav.map((item, i) => (
+      <a
+        href={`#${item.id}`}
+        data-menu-link
+        class="text-lg text-light transition-colors hover:text-accent"
+      >
+        <span class="font-mono text-sm text-accent">
+          {String(i + 1).padStart(2, "0")}.
+        </span>
+        <span class="ml-2">{item.label}</span>
+      </a>
+    ))
+  }
+  <a
+    href={profile.resumeUrl}
+    download
+    data-menu-link
+    class="mt-2 rounded border border-accent px-6 py-2.5 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
+  >
+    Resume
+  </a>
+</div>
+
+<script>
+  const navEl = document.getElementById("site-nav");
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  // Add a backdrop to the nav once the page is scrolled.
+  const onScroll = () =>
+    navEl?.classList.toggle("scrolled", window.scrollY > 24);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Mobile menu open/close.
+  const setMenu = (open: boolean) => {
+    menu?.classList.toggle("is-open", open);
+    iconOpen?.classList.toggle("hidden", open);
+    iconClose?.classList.toggle("hidden", !open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.classList.toggle("overflow-hidden", open);
+  };
+
+  toggle?.addEventListener("click", () =>
+    setMenu(toggle.getAttribute("aria-expanded") !== "true"),
+  );
+  menu
+    ?.querySelectorAll("[data-menu-link]")
+    .forEach((link) => link.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenu(false);
+  });
+</script>

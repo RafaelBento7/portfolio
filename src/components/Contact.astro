@@ -1,0 +1,35 @@
+---
+import Section from "./Section.astro";
+import { profile, contact } from "../data/content";
+
+const mailto = `mailto:${profile.email}?subject=${encodeURIComponent("Hello Rafael")}`;
+---
+
+<Section id="contact" number="07" title="Get In Touch">
+  <p class="max-w-xl leading-normal text-stone-400">
+    {contact.body}
+  </p>
+
+  <a
+    href={mailto}
+    class="group mt-8 inline-flex items-center gap-2 rounded-md border border-accent px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10 focus-visible:bg-accent/10 focus-visible:outline-none"
+  >
+    <svg
+      class="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z" />
+      <path d="m22 6-10 7L2 6" />
+    </svg>
+    Say Hello
+  </a>
+
+  <p class="mt-4 text-sm text-stone-500">
+    or email me directly at
+    <a href={mailto} class="text-accent hover:underline">{profile.email}</a>
+  </p>
+</Section>

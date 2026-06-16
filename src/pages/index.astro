@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Education from "../components/Education.astro";
+import Skills from "../components/Skills.astro";
+import Career from "../components/Career.astro";
+import Projects from "../components/Projects.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Contact from "../components/Contact.astro";
+import { profile } from "../data/content";
+---
+
+<Layout>
+  <!-- Cursor spotlight glow (pointer devices, large screens) -->
+  <div
+    id="spotlight"
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 z-30 hidden transition-opacity duration-300 lg:block"
+    style="background: radial-gradient(600px circle at var(--x, 50%) var(--y, -100px), rgba(246, 177, 60, 0.06), transparent 70%);"
+  >
+  </div>
+
+  <a
+    href="#hero"
+    class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:font-medium focus:text-canvas"
+  >
+    Skip to content
+  </a>
+
+  <Nav />
+
+  <main class="mx-auto max-w-5xl px-6 pb-16">
+    <Hero />
+    <About />
+    <Education />
+    <Skills />
+    <Career />
+    <Projects />
+    <Testimonials />
+    <Contact />
+
+    <footer
+      class="mt-12 border-t border-surface pt-8 pb-4 text-sm text-stone-500"
+    >
+      <p>
+        Built with
+        <a
+          class="text-stone-400 hover:text-accent"
+          href="https://astro.build"
+          target="_blank"
+          rel="noreferrer">Astro</a
+        >
+        &amp;
+        <a
+          class="text-stone-400 hover:text-accent"
+          href="https://tailwindcss.com"
+          target="_blank"
+          rel="noreferrer">Tailwind CSS</a
+        >. Designed &amp; coded by {profile.name}.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // --- Scroll-reveal -------------------------------------------------
+    const reveals = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12 },
+    );
+    reveals.forEach((el) => revealObserver.observe(el));
+
+    // --- Scroll-spy for the top nav ------------------------------------
+    const navLinks = document.querySelectorAll<HTMLElement>(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            navLinks.forEach((link) =>
+              link.classList.toggle("active", link.dataset.nav === id),
+            );
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((section) => spyObserver.observe(section));
+
+    // --- Cursor spotlight glow (fine pointers only) --------------------
+    const spotlight = document.getElementById("spotlight");
+    if (spotlight && window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", (event) => {
+        spotlight.style.setProperty("--x", `${event.clientX}px`);
+        spotlight.style.setProperty("--y", `${event.clientY}px`);
+      });
+    }
+  </script>
+</Layout>

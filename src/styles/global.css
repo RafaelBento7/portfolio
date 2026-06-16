@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — tweak the palette here and it flows everywhere.    */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-canvas: #14120e;
+  --color-surface: #221d16;
+  --color-surface-2: #2f281e;
+  --color-light: #ece5d8;
+  --color-lightest: #fbf7f0;
+  --color-accent: #f6b13c;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: #a8a29e; /* stone-400 */
+}
+
+::selection {
+  background-color: rgba(246, 177, 60, 0.22);
+  color: var(--color-lightest);
+}
+
+/* Subtle custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface-2) var(--color-canvas);
+}
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--color-canvas);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-surface-2);
+  border-radius: 9999px;
+  border: 2px solid var(--color-canvas);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scroll-reveal — only hidden when JS is available (no FOUC w/o JS). */
+/* ------------------------------------------------------------------ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Top nav: active link + backdrop on scroll + mobile menu overlay.   */
+/* ------------------------------------------------------------------ */
+.nav-link.active {
+  color: var(--color-accent);
+}
+
+#site-nav {
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+#site-nav.scrolled {
+  background-color: rgba(20, 18, 14, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 0 rgba(236, 229, 216, 0.06);
+}
+
+#mobile-menu {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+#mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

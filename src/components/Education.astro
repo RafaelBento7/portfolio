@@ -1,0 +1,49 @@
+---
+import Section from "./Section.astro";
+import { education, awards } from "../data/content";
+---
+
+<Section id="education" number="02" title="Education">
+  <ol class="group/list space-y-3">
+    {
+      education.map((item) => (
+        <li>
+          <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-6 lg:hover:opacity-100! lg:group-hover/list:opacity-60">
+            <div class="absolute -inset-x-4 -inset-y-3 z-0 hidden rounded-lg transition motion-reduce:transition-none lg:block lg:group-hover:bg-surface/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(236,229,216,0.08)]" />
+            <header class="z-10 mb-1 mt-1 text-xs font-semibold uppercase tracking-wide text-stone-500 sm:col-span-2">
+              {item.period}
+            </header>
+            <div class="z-10 sm:col-span-6">
+              <h3 class="font-medium leading-snug text-lightest">{item.degree}</h3>
+              <p class="text-sm text-accent">{item.school}</p>
+              <p class="mt-2 text-sm leading-normal text-stone-400">{item.detail}</p>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  {
+    awards.length > 0 && (
+      <div class="mt-10">
+        <h3 class="mb-4 font-mono text-xs uppercase tracking-wider text-accent">
+          Honors &amp; Awards
+        </h3>
+        <ul class="space-y-3">
+          {awards.map((award) => (
+            <li class="grid sm:grid-cols-8 sm:gap-6">
+              <span class="mb-0.5 text-xs font-semibold uppercase tracking-wide text-stone-500 sm:col-span-2">
+                {award.period}
+              </span>
+              <span class="text-sm sm:col-span-6">
+                <span class="text-lightest">{award.title}</span>
+                <span class="text-stone-400"> — {award.org}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</Section>

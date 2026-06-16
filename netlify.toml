@@ -1,0 +1,9 @@
+# Netlify build configuration for the Astro static site.
+# Connect this repo in the Netlify dashboard and these settings are picked up automatically.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

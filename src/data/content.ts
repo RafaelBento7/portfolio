@@ -1,21 +1,12 @@
-/**
- * Single source of truth for every bit of copy on the site.
- * Edit this file to update the portfolio — the layout and styling all read
- * from here, so you never have to touch the markup.
- *
- * Inline HTML (e.g. <span class="text-light">word</span>) is allowed in the
- * `about` paragraphs to emphasise words. Everything else is plain text.
- */
-
 export const profile = {
   name: "Rafael Bento",
   title: "Full Stack Developer",
   summary:
-    "Software developer based in Portugal, focused on backend development and system integrations — building web platforms, REST APIs and business applications with Laravel, C# .NET and Android.",
-  location: "Lourinhã, Portugal",
+    "Full Stack developer, with a strong interest on backend development and system integrations — building web platforms, REST APIs and business applications with Laravel, C# .NET and Android.",
+  location: "Lisbon, Portugal",
   email: "rafaelcarreirabento7@gmail.com",
-  // Your real CV lives here. Replace public/resume.pdf to update it.
   resumeUrl: "/resume.pdf",
+  photo: "photo.jpg",
   socials: [
     { name: "GitHub", url: "https://github.com/RafaelBento7", icon: "github" },
     {
@@ -37,9 +28,9 @@ export const nav = [
 ] as const;
 
 export const about = [
-  'My name is Rafael Bento — a <span class="text-light">software developer</span> based in Lourinhã, Portugal, with a strong interest in backend development and system integrations. I work mostly with Laravel, C# .NET and Android, building web platforms, REST APIs and business applications.',
-  'I also like building things of my own. One of those is <span class="text-light">Classic Games</span>, a personal project on GitHub that brings together a collection of timeless games — a fun way to keep experimenting and learning.',
-  "Adaptable, proactive and committed to continuous growth, I'd describe myself as a fast learner who is communicative and enjoys solving problems. I speak Portuguese natively, English at a B2 level, and a little French/Spanish (learned by myself, nothing official).",
+  'My name is Rafael Bento, a <span class="text-light">full stack developer</span>, with a strong interest in backend development and system integrations. I work mostly with Laravel, C# .NET and Android, building web platforms, REST APIs and business applications.',
+  'Outside of work, I enjoy developing personal projects such as <a class="font-medium text-light underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent" href="https://play.google.com/store/apps/details?id=com.classicgames.myapplication" target="_blank" rel="noreferrer">Classic Games</a>, an Android app that bundles a handful of timeless games (Snake, Wordle, Mastermind, Hangman, Tic-Tac-Toe and more) with high-score leaderboards and multilingual support.',
+  "I am a fast learner who enjoys solving problems and continuously improving my technical skills. I value clear communication, adaptability and teamwork. I am a native Portuguese speaker, fluent in English (B2), and have a very basic knowledge of French and Spanish.",
 ];
 
 export const education = [
@@ -78,7 +69,7 @@ export const skills = {
   tools: [
     ".NET Framework",
     "Laravel",
-    "Yii Framework",
+    "Yii2 Framework",
     "Alpine.js",
     "Tailwind CSS",
     "Bootstrap",
@@ -86,6 +77,11 @@ export const skills = {
     "Android Studio",
     "Git",
     "REST APIs",
+    "Postman",
+    "VS Code",
+    "Visual Studio",
+    "Kalipso Studio",
+    "Composer"
   ],
 };
 
@@ -97,7 +93,7 @@ export const career = [
     url: "",
     description:
       "Building the Treviane real-estate network platform with Laravel (PHP). Backend-focused development with frontend work in Tailwind CSS and Alpine.js, scheduled CRON jobs for automated tasks, and integrations with external REST APIs and third-party services (Moloni, Ifthenpay, EasyPay, and others).",
-    tech: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "REST APIs"],
+    tech: ["Laravel", "PHP", "Tailwind CSS", "Alpine.js", "REST APIs", "MySQL"],
   },
   {
     period: "2023 — 2025",
@@ -106,7 +102,7 @@ export const career = [
     url: "",
     description:
       "C# .NET development integrating and extending SAGE software via its API; designed and built RESTful web services in C# and PHP for mobile and external integrations. Android development with Android Studio and Kalipso Studio (RAD), plus Laravel web applications built to custom client requirements.",
-    tech: ["C#", ".NET", "PHP", "Laravel", "Android Studio"],
+    tech: ["C#", ".NET", "PHP", "Laravel", "Android Studio", "MySQL", "SQL Server", "SQLite", "Kalipso Studio"],
   },
   {
     period: "2023 · 5 months",
@@ -128,32 +124,32 @@ export const career = [
   },
 ];
 
-// The CV didn't include project details, so these are still placeholders.
-// Replace them with your real work (links can point to live sites or repos).
+// `url` = live demo/site, `repo` = source code. Leave either empty to hide its
+// icon; if both are empty the card title is plain text (not a link).
 export const projects = [
   {
-    title: "Project One",
+    title: "Classic Games",
     description:
-      "Short description of a project you're proud of — what it does, the problem it solves, and your role. Replace this placeholder.",
-    tech: ["Laravel", "Tailwind CSS"],
+      "An Android app that bundles a collection of timeless games — Snake, Tic-Tac-Toe, Mastermind, Wordle, Hangman and True Colors — with high-score leaderboards, multiple languages and a clean MVVM architecture. All data stays on the device.",
+    tech: ["Java", "Android", "MVVM"],
     url: "",
-    repo: "https://github.com/RafaelBento7",
+    repo: "https://play.google.com/store/apps/details?id=com.classicgames.myapplication",
   },
   {
-    title: "Project Two",
+    title: "AutoCRUD for Laravel",
     description:
-      "Another project highlight. Add a sentence or two about the stack and what makes it interesting.",
-    tech: ["C#", ".NET"],
+      "A C# tool that auto-generates full CRUD scaffolding — models, views, controllers, documentation and more — for Laravel 11+ projects, taking the repetitive boilerplate out of creating new resources.",
+    tech: ["Laravel", "PHP", "Composer"],
     url: "",
-    repo: "https://github.com/RafaelBento7",
+    repo: "https://github.com/RafaelBento7/AutoCRUDLaravel",
   },
   {
-    title: "Project Three",
+    title: "Aerocontrol",
     description:
-      "A third project, side-project or open-source contribution. Link it to a live demo or its GitHub repository.",
-    tech: ["JavaScript"],
+      "Final academic project: a dual-platform system for managing airline operations — aircraft, users, flights, restaurants and more. Built as a Yii2 web application (separate frontend and backend) paired with an Android app that consumes the backend REST API.",
+    tech: ["Yii2 Framework", "PHP", "REST API", "Android Studio", "Java", "MySQL"],
     url: "",
-    repo: "https://github.com/RafaelBento7",
+    repo: "https://github.com/RafaelBento7/FinalProjectTesp",
   },
 ];
 
@@ -165,13 +161,13 @@ export const testimonials = [
     quote:
       "Rafael collaborated with us as a developer and showed real adaptability and a strong sense of responsibility in developing and maintaining our solutions. He grasps requirements easily, solves problems, and stays on top of the needs of the projects he's involved in — always professional, collaborative and well-organised. He brings technical and personal strengths that will be an asset to any software development team.",
     name: "Ricardo Carvalho",
-    role: "Manager",
-    company: "PastaDigital — Soluções Tecnológicas",
+    role: "CEO",
+    company: "PastaDigital — Soluções Tecnológicas, Lda",
     letterUrl: "/recommendation.pdf",
   },
 ];
 
 export const contact = {
   body:
-    "I'm currently open to new opportunities and interesting projects. Whether you'd like to talk about a role, a collaboration, or just say hello, my inbox is always open — I'll do my best to get back to you.",
+    "I'm currently open to hear new opportunities and interesting projects. Whether you'd like to talk about a role, a collaboration, or just say hello, my inbox is always open. I'll do my best to get back to you as soon as possible.",
 };

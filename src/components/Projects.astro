@@ -6,7 +6,9 @@ import { projects } from "../data/content";
 <Section id="projects" number="05" title="Projects">
   <div class="grid gap-4 sm:grid-cols-2">
     {
-      projects.map((project) => (
+      projects.map((project) => {
+        const href = project.url || project.repo;
+        return (
         <article class="group relative flex flex-col rounded-lg border border-surface bg-surface/30 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:bg-surface/60 motion-reduce:hover:translate-y-0">
           <div class="relative z-10 flex items-center justify-between">
             <svg
@@ -60,10 +62,14 @@ import { projects } from "../data/content";
           </div>
 
           <h3 class="mt-5 text-lg font-semibold text-lightest transition-colors group-hover:text-accent">
-            <a href={project.url} target="_blank" rel="noreferrer">
-              <span class="absolute inset-0" aria-hidden="true" />
-              {project.title}
-            </a>
+            {href ? (
+              <a href={href} target="_blank" rel="noreferrer">
+                <span class="absolute inset-0" aria-hidden="true" />
+                {project.title}
+              </a>
+            ) : (
+              project.title
+            )}
           </h3>
           <p class="mt-2 flex-grow text-sm leading-normal text-stone-400">
             {project.description}
@@ -74,7 +80,8 @@ import { projects } from "../data/content";
             ))}
           </ul>
         </article>
-      ))
+        );
+      })
     }
   </div>
 </Section>

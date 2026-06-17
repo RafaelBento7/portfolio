@@ -1,10 +1,52 @@
 ---
 import Section from "./Section.astro";
-import { about } from "../data/content";
+import { about, profile } from "../data/content";
 ---
 
 <Section id="about" number="01" title="About">
-  <div class="space-y-4 text-stone-400">
-    {about.map((paragraph) => <p set:html={paragraph} />)}
+  <div class="grid gap-8 md:grid-cols-5 md:items-start md:gap-10">
+    <div class="space-y-4 text-stone-400 md:col-span-3">
+      {about.map((paragraph) => <p set:html={paragraph} />)}
+    </div>
+
+    <div class="md:col-span-2">
+      <div class="group relative mx-auto w-full max-w-65 md:ml-auto md:mr-0">
+        <div
+          class="relative z-10 overflow-hidden rounded-xl border border-surface bg-surface/40"
+        >
+          {
+            profile.photo ? (
+              <img
+                src={profile.photo}
+                alt={profile.name}
+                width="520"
+                height="650"
+                class="aspect-4/5 w-full object-cover transition-all duration-300"
+              />
+            ) : (
+              <div class="flex aspect-4/5 w-full flex-col items-center justify-center gap-2 text-stone-500">
+                <svg
+                  class="h-10 w-10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 21a8 8 0 0 1 16 0" />
+                </svg>
+                <span class="font-mono text-xs uppercase tracking-wider">Your photo</span>
+              </div>
+            )
+          }
+        </div>
+        <div
+          class="absolute inset-0 z-0 translate-x-4 translate-y-4 rounded-xl border-2 border-accent/70 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-3"
+          aria-hidden="true"
+        >
+        </div>
+      </div>
+    </div>
   </div>
 </Section>
